@@ -63,20 +63,20 @@ const Navbar = () => {
             to="../Events"
 
           >
-            Events
+            Connections
           </NavLink>
           <NavLink
             className="nav-link"
             to="../Vendors"
 
           >
-            Vendors
+            Chat Bot
           </NavLink>
           {AuthService.loggedIn() ? (
             <>
               <NavLink
                 className="nav-link"
-                to="../EventCreateForm"
+                to="../Logout"
 
               >
                 Create an Event

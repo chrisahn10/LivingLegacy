@@ -2,6 +2,7 @@ import EventCards from './EventCards';
 import EventDetails from './EventDetails';
 import { useNavigate } from 'react-router-dom';
 import '../assets/css/Events.css';
+import beigeImage from '../assets/home/beige.jpg';
 
 function Events() {
   // Get the navigate function from react-router-dom
@@ -9,6 +10,13 @@ function Events() {
 
   // Check if there's an eventId in the URL
   const isEventDetailsPage = window.location.pathname.split('/').length === 3;
+
+  const backgroundImageStyle = {
+    backgroundImage: `url(${beigeImage})`,
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+  };
 
   // If it's the main Events page, render EventCards
   if (!isEventDetailsPage) {
