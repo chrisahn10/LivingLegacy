@@ -9,11 +9,14 @@ module.exports = withMT({
     extend: {
       backgroundImage: {
         'aboutUsHero': "url('../src/assets/home/team.jpg')",
-        'eventsHero' : "url('../src/assets/home/eventsHero.jpg')",
-        'vendorsHero' : "url('../src/assets/home/vendorsHero.jpg')",
+        'eventsHero' : "url('../src/assets/home/beige.jpg')",
+        'vendorsHero' : "url('../src/assets/home/beige.jpg')",
         'loginHero' : "url('../src/assets/home/loginHero.jpg')",
         'signupHero' : "url('../src/assets/home/signupHero.jpg')"
-      }
+      },
+      backgroundColor: {
+        'beige': '#F5F5DC', // Replace with your desired beige color code
+      },
     },
     screens: {
       'sm': '640px',
