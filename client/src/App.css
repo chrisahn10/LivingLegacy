@@ -1,0 +1,157 @@
+* {
+    font-family: 'Concert One', sans-serif;
+}
+
+html,
+body,
+h1 {
+    font-size: large;
+}
+p {
+    margin: 0;
+    padding: 0;
+}
+
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+a {
+    font-weight: 500;
+    color: #646cff;
+    text-decoration: inherit;
+}
+
+a:hover {
+    color: #535bf2;
+}
+
+h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+h3 {
+    font-weight: 900;
+    font-size: 1em;
+    margin-bottom: 10px
+}
+
+button {
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: #1a1a1a;
+    cursor: pointer;
+    transition: border-color 0.25s;
+}
+
+button:hover {
+    border-color: #646cff;
+}
+
+button:focus,
+button:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+}
+
+p {
+    font-size: 1em;
+    margin-bottom: 10px;
+}
+nav {
+    transition: height 0.3s ease-in-out; /* Add a default transition property */
+  }
+.nav-link {
+    font-family: 'Bree Serif', serif;
+    color: cyan;
+}
+
+.nav-link.active {
+    color: lime;
+    font-family: 'Bree Serif', serif;
+    font-weight: 800;
+}
+
+.logout-button {
+    font-family: 'Bree Serif', serif;
+    color: cyan;
+    font-size: 16px;
+    padding: 5px 15px;
+    margin: 5px;
+    border-radius: 20px;
+    border: 1px solid rgba(13, 177, 232, 0.8);
+    box-shadow: 0 0 20px rgba(13, 177, 232, 0.4);
+}
+
+
+
+
+/* Media Queries */
+
+
+/* Styles for screens smaller than 600px */
+@media screen and (max-width: 600px) {
+    .logout-button {
+        margin-left: .75em;
+        margin-top: .2em;
+    }
+
+    .header-shrink {   
+        /* Adjust the height as needed */
+        transition: height 0.3s ease-in-out;
+    }
+    #mobile-menu {
+        transition: transform 0.3s ease-in-out;
+    }
+    
+    .mobile-menu-show {
+        transform: translateX(100%);
+    }
+    
+    .mobile-menu-hide {
+        transform: translateX(0);
+    }
+}
+
+/* Styles for screens between 600px and 900px */
+@media screen and (min-width: 601px) and (max-width: 900px) {
+    .logout-button {
+        margin-left: .75em;
+        margin-top: .2em;
+    }
+
+    .header-shrink {   
+        /* Adjust the height as needed */
+        transition: height 0.3s ease-in-out;
+    }
+    #mobile-menu {
+        transition: transform 0.3s ease-in-out;
+    }
+    
+    .mobile-menu-show {
+        transform: translateX(100%);
+    }
+    
+    .mobile-menu-hide {
+        transform: translateX(0);
+    }
+}
+
+/* Styles for screens larger than 900px */
+@media screen and (min-width: 901px) {
+    /* Your CSS rules for large screens here */
+}
