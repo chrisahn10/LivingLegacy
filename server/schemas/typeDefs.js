@@ -1,73 +1,45 @@
 const typeDefs = `#graphql
 
-scalar Date
-
-  type User {
-  _id: ID!
-  username: String
+type User {
+  id: ID!
+  username: String!
   email: String!
-  password: String!
-  isAdmin: Boolean
-  savedDemos: [Demo]  # Many demos associated with a user
-  savedEvents: [Event]  # Many events associated with a user
+  posts: [Post]
 }
-type UserType {
-  _id: ID
-  username: String
-}
-type Event {
-    _id: ID!
-  title: String
-  date: Date
+
+type Post {
+  id: ID!
+  postTitle: String!
+  postContent: String!
+  date: String
   time: String
-  description: String
-  image: String
-  vendors: [User]
-  demos: [Demo]
+  user: User!
+  likes: [User]
+  comments: [Comment]
 }
-input EventInput {
-  title: String!
-  date: Date!
-  time: String!
-  description: String!
-  image: String!
-}
-type Demo {
-  _id: ID!
-  demotitle: String
-  date: Date
+
+type Comment {
+  id: ID!
+  commentContent: String!
+  date: String
   time: String
-  user: User
+  user: User!
 }
 
-input DemoInput {
-  demotitle: String!
-  date: Date!
-  time: String!
-}
-
-type Auth {
-  token: ID!
-  user: User
-}
-
+# Queries
 type Query {
-  me: User!
-  eventsFromAllUsers: [Event]
-  demosFromAllUsers: [Demo]
-  usersFromEvent: [User]
-  allUsers: [User]
-  eventDetails(eventId: ID!): Event
+  users: [User]
+  posts: [Post]
+  user(id: ID!): User
+  post(id: ID!): Post
 }
 
+# Mutations
 type Mutation {
-login(email: String!, password: String!): Auth
-addUser(username: String!, email: String!, password: String!, isAdmin: Boolean): Auth
-saveEvent(event: EventInput!): User
-removeEvent(eventId: ID!): User  
-saveDemo(demo: DemoInput): User
-removeDemo(demoId: ID!): User 
-signUpForEvent(eventId: ID!, userId: ID!): User
+  createUser(username: String!, email: String!, password: String!): User
+  createPost(userId: ID!, postTitle: String!, postContent: String!): Post
+  updateUser(id: ID!, username: String, email: String): User
+  deletePost(id: ID!): Post
 }
 `;
 

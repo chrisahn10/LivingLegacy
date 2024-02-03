@@ -24,12 +24,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    isAdmin: {
-      type: Boolean,
-      default: false, // Default value is false (not an admin)
-    },
-    savedDemos: [{demotitle: String, date: Date, time: String, user: ObjectId}],
-    savedEvents: [{title: String, date: Date, time: String, description: String, image: String, user: ObjectId}],
+    userPosts: [{ type: ObjectId, ref: 'Post' }],
   },
   // set this to use virtual below
   {
@@ -54,15 +49,7 @@ userSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
 
-// When we query a user, we'll also get another field called `eventCount` with the number of saved events we have
-userSchema.virtual('eventCount').get(function () {
-  return this.savedEvents.length;
-});
 
-// When we query a user, we'll also get another field called `demoCount` with the number of saved demos we have
-userSchema.virtual('demoCount').get(function () {
-  return this.savedDemos.length;
-});
 
 const User = model('User', userSchema);
 

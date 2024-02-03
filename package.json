@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@material-tailwind/react": "^2.1.8",
+    "dotenv": "^16.4.1",
     "mongodb": "6.3",
     "vite": "^5.0.11"
   }
