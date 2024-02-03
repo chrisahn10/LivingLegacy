@@ -19,6 +19,7 @@ function Events() {
 
     return (
       <div className="events-container">
+        <h1>Chatting with Legacies</h1>
         <EventCards onEventClick={handleEventClick} />
       </div>
     );
