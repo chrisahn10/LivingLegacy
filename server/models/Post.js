@@ -6,7 +6,7 @@ const postSchema = new Schema({
       type: String,
       required: 'Cannot leave empty!',
       minlength: 1,
-      maxlength: 300,
+      maxlength: 3000,
     },
     postAuthor: {
       type: String,
