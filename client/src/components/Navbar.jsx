@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import logoImage from '../assets/home/logo.png';
+import LLegacyImage from '../assets/home/LLegacy.png';
 import AuthService from '../utils/auth';
 import { Button } from "@material-tailwind/react";
 import '../App.css';
@@ -32,13 +32,13 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={`bg-gradient-to-r from-cyan-900 to-green-800 py-1.75 lg:sticky top-0 z-50 ${mobileMenuVisible ? 'header-shrink' : ''}`} id='navbar'>
+    <nav className={`bg-brown py-1.75 lg:sticky top-0 z-50 ${mobileMenuVisible ? 'header-shrink' : ''}`} id='navbar'>
       <div className="container mx-auto flex justify-between items-center">
 
-        {/* EventsCenter Logo */}
+        {/* LL Logo */}
 
         <div className="flex items-center align-center">
-          <a href="/"><img src={logoImage} alt="EventCenter" className="h-14 mr-3 mb-3" style={{ height: "60px" }} /></a>
+          <a href="/"><img src={LLegacyImage} alt="Living Legacy" className="h-14 mr-3 mb-3" style={{ width: "300px", height: "80px" }} /></a>
         </div>
 
         {/* DESKTOP NAVBAR */}
@@ -63,14 +63,14 @@ const Navbar = () => {
             to="../Events"
 
           >
-            Connections
+            Feed
           </NavLink>
           <NavLink
             className="nav-link"
             to="../Vendors"
 
           >
-            Chat Bot
+            Legacies
           </NavLink>
           {AuthService.loggedIn() ? (
             <>

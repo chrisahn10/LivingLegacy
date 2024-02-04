@@ -33,7 +33,7 @@ a {
 }
 
 a:hover {
-    color: #535bf2;
+    color: #000000;
 }
 
 h1 {
@@ -46,6 +46,11 @@ h3 {
     font-size: 1em;
     margin-bottom: 10px
 }
+
+.bg-brown {
+    background-color: rgba(231, 184, 103, 0.45); /* Set your desired brown color */
+  }
+
 
 button {
     border-radius: 8px;
@@ -60,8 +65,9 @@ button {
 }
 
 button:hover {
-    border-color: #646cff;
+    border-color: #000002;
 }
+
 
 button:focus,
 button:focus-visible {
@@ -77,11 +83,11 @@ nav {
   }
 .nav-link {
     font-family: 'Bree Serif', serif;
-    color: cyan;
+    color: rgb(228, 236, 236);
 }
 
 .nav-link.active {
-    color: lime;
+    color: rgb(0, 5, 0);
     font-family: 'Bree Serif', serif;
     font-weight: 800;
 }
