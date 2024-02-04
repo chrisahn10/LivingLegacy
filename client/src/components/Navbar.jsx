@@ -65,19 +65,11 @@ const Navbar = () => {
           >
             Feed
           </NavLink>
-          <NavLink
-            className="nav-link"
-            to="../Vendors"
-
-          >
-            Legacies
-          </NavLink>
           {AuthService.loggedIn() ? (
             <>
               <NavLink
                 className="nav-link"
-                to="../Logout"
-
+                to="../EventCreateForm"
               >
                 Create an Event
               </NavLink>

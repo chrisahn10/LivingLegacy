@@ -60,7 +60,7 @@ const LoginForm = () => {
           Log In
         </Typography>
         <Typography color="gray" className="mt-1 font-normal">
-          Enter to create events or sign up to be a vendor
+          Sign up or log in to talk to legacies!
         </Typography>
         <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
           <div className="mb-1 flex flex-col gap-6">
