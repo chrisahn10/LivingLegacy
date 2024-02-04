@@ -60,7 +60,7 @@ const Navbar = () => {
           </NavLink>
           <NavLink
             className="nav-link"
-            to="../Events"
+            to="../Feed"
 
           >
             Feed

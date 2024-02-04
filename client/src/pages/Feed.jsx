@@ -1,37 +1,37 @@
+import PostFeed from '../components/PostFeed';
+import PostForm from '../components/PostForm';
+import { useQuery } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 import beigeImage from '../assets/home/beige.jpg';
+import { QUERY_POSTS } from '../utils/queries';
 
-function Events() {
-  // Get the navigate function from react-router-dom
-  const navigate = useNavigate();
+function Feed () {
+  const { loading, data } = useQuery(QUERY_POSTS);
+  const posts = data?.thoughts || [];
 
-  // Check if there's an eventId in the URL
-  const isEventDetailsPage = window.location.pathname.split('/').length === 3;
-
-  const backgroundImageStyle = {
-    backgroundImage: `url(${beigeImage})`,
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center',
-    backgroundSize: 'cover',
-  };
-
-  // If it's the main Events page, render the content for Events
-  if (!isEventDetailsPage) {
-    const handleEventClick = (eventId) => {
-      // Navigate to the EventDetails page when an event is clicked
-      navigate(`/events/${eventId}`);
-    };
-
-    return (
-      <div className="events-container">
-        <h1>Chatting with Legacies</h1>
-        {/* You can add your new component or content here */}
+  return (
+    <main>
+      <div className="flex-row justify-center">
+        <div
+          className="col-12 col-md-10 mb-3 p-3"
+          style={{ border: '1px dotted #1a1a1a' }}
+        >
+          <PostForm />
+        </div>
+        <div className="col-12 col-md-8 mb-3">
+          {loading ? (
+            <div>Loading...</div>
+          ) : (
+            <PostFeed
+              posts={posts}
+              title="Some Feed for Thought(s)..."
+            />
+          )}
+        </div>
       </div>
-    );
-  }
-
-  // If it's the EventDetails page, you can leave it empty or render something else based on your requirements
-  return <div>EventDetails page content or placeholder</div>;
+    </main>
+  );
 }
 
-export default ;
+
+export default Feed;

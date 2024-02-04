@@ -7,7 +7,7 @@ import LoginForm from './pages/LoginForm'
 import SignupForm from './pages/SignupForm'
 import Home from './pages/home'
 import AboutUs from './pages/AboutUs'
-
+import Feed from './pages/Feed'
 
 const router = createBrowserRouter([
   {
@@ -27,7 +27,10 @@ const router = createBrowserRouter([
       }, {
         path: '/AboutUs',
         element: <AboutUs />
-      },
+      }, {
+        path: '/Feed',
+        element: <Feed />
+      }
     ]
   }
 ]);

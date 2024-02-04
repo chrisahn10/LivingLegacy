@@ -16,14 +16,9 @@ const resolvers = {
     user: async (parent, { username }) => {
       return User.findOne({ username }).populate('posts');
     },
-    posts: async () => {
-      try {
-        const posts = await Post.find();
-        return posts;
-      } catch (error) {
-        console.error(error);
-        throw new Error('Failed to fetch all posts');
-      }
+    posts: async (parent, { username }) => {
+      const params = username ? { username } : {};
+      return Post.find(params).sort({ createdAt: -1 });
     },
     post: async (parent, { postId }) => {
       return Post.findOne({ _id: postId });
