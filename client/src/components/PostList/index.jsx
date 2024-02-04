@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import captionImage from '../../assets/home/caption.jpg';
 
 const PostList = ({
   posts,
@@ -7,26 +8,24 @@ const PostList = ({
   showUsername = true,
 }) => {
   if (!posts.length) {
-    console.log(posts)
     return <h3>No Posts Yet</h3>;
   }
 
   return (
-    <div>
+    <div className="post-container">
       {showTitle && <h3>{title}</h3>}
-      {posts &&
-        posts.map((post) => (
-          <div key={post._id} className="card mb-3">
+      {posts.map((post) => (
+        <div key={post._id} className="post-box">
+          <div className="card mb-3 post-card">
             <h4 className="card-header bg-primary text-light p-2 m-0">
               {showUsername ? (
-                <Link
-                  className="text-light"
-                  to={`/profiles/${post.postAuthor}`}
-                >
-                  {post.postAuthor} <br />
-                  <span style={{ fontSize: '1rem' }}>
-                    had this thought on {post.createdAt}
-                  </span>
+                <Link className="text-light" to={`/profiles/${post.postAuthor}`}>
+                  <div className="username-container">
+                    <span className="username">{post.postAuthor}</span>
+                    <span style={{ fontSize: '0.8rem', marginLeft: '5px' }}>
+                      had this thought on {post.createdAt}
+                    </span>
+                  </div>
                 </Link>
               ) : (
                 <>
@@ -36,17 +35,31 @@ const PostList = ({
                 </>
               )}
             </h4>
-            <div className="card-body bg-light p-2">
-              <p>{post.postContent}</p>
+            <div
+              className="card-body bg-light p-2"
+              style={{
+                backgroundImage: `url(${captionImage})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                color: 'black',
+                overflow: 'hidden',
+                height: 'auto',
+              }}
+            >
+              <div className="card-text">
+                <p>{post.postContent}</p>
+              </div>
             </div>
             <Link
               className="btn btn-primary btn-block btn-squared"
               to={`/posts/${post._id}`}
+              style={{ fontSize: '0.8rem' }}
             >
               Join the discussion on this thought.
             </Link>
           </div>
-        ))}
+        </div>
+      ))}
     </div>
   );
 };

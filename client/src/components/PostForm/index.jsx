@@ -8,25 +8,18 @@ import { QUERY_POSTS, QUERY_ME } from '../../utils/queries';
 import Auth from '../../utils/auth';
 
 const PostForm = () => {
-
   const [postContent, setPostContent] = useState('');
   const [characterCount, setCharacterCount] = useState(0);
 
-  const [addPost, { error }] = useMutation
-  (ADD_POST, {
-    refetchQueries: [
-      QUERY_POSTS,
-      'getPosts',
-      QUERY_ME,
-      'me'
-    ]
+  const [addPost, { error }] = useMutation(ADD_POST, {
+    refetchQueries: [QUERY_POSTS, 'getPosts', QUERY_ME, 'me'],
   });
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      const { data } = await addPost({
+      await addPost({
         variables: {
           postContent,
           postAuthor: Auth.getProfile().data.username,
@@ -34,19 +27,21 @@ const PostForm = () => {
       });
 
       setPostContent('');
+      setCharacterCount(0);
     } catch (err) {
       console.error(err);
     }
   };
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
+    const { value } = event.target;
 
-    if (name === 'postContent' && value.length <= 280) {
+    if (value.length <= 280) {
       setPostContent(value);
       setCharacterCount(value.length);
     }
   };
+  
 
   return (
     <div>
@@ -54,18 +49,10 @@ const PostForm = () => {
 
       {Auth.loggedIn() ? (
         <>
-          <p
-            className={`m-0 ${
-              characterCount === 280 || error ? 'text-danger' : ''
-            }`}
-          >
+          <p className={`m-0 ${characterCount === 280 || error ? 'text-danger' : ''}`}>
             Character Count: {characterCount}/280
           </p>
-          <form
-            className="flex-row justify-center justify-space-between-md align-center"
-            onSubmit={handleFormSubmit}
-          >
-
+          <form className="flex-row justify-center justify-space-between-md align-center" onSubmit={handleFormSubmit}>
             <div className="col-12 col-lg-9">
               <textarea
                 name="postContent"
@@ -76,7 +63,6 @@ const PostForm = () => {
                 onChange={handleChange}
               ></textarea>
             </div>
-
             <div className="col-12 col-lg-3">
               <button className="btn btn-primary btn-block py-3" type="submit">
                 Add Post
