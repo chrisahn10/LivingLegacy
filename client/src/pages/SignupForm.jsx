@@ -11,6 +11,7 @@ import {
 } from "@material-tailwind/react";
 
 const SignupForm = () => {
+  console.log("we are in signupform")
   const [formState, setFormState] = useState({
     username: '',
     email: '',

@@ -27,7 +27,9 @@ const resolvers = {
   Mutation: {
     addUser: async (parent, { username, email, password }) => {
       // Create a user
+      console.log("the addUser mutation was called")
       const user = await User.create({ username, email, password });
+      console.log("we awaited User and created one", user)
       // To reduce friction for the user, we immediately sign a JSON Web Token and log the user in after they are created
       const token = signToken(user);
       console.log(user);
