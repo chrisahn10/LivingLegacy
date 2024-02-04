@@ -26,6 +26,65 @@ body {
     padding: 20px;
 }
 
+/* Styles for the post cards */
+.post-card {
+    background-color: rgb(244, 196, 196);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 10px; /* Adjust spacing between post cards as needed */
+    width: 300px; /* Set the desired width for your squared post cards */
+    height: 300px; /* Set the desired height for your squared post cards */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    text-align: center; /* Center text within the card */
+  }
+  
+  
+  .post-card h4 {
+    font-size: 1.2rem;
+    color: #333;
+    margin: 0;
+    padding-bottom: 10px;
+  }
+  
+  .post-card p {
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  .post-card a {
+    color: #041a32;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .post-card a:hover {
+    text-decoration: underline;
+  }
+
+  .post-card .card-body {
+    background-image: url(${captionImage});
+    background-size: cover; /* Set background size to cover the entire card body */
+    background-position: center; /* Center the background image both vertically and horizontally */
+    color: #fff; /* Text color on top of the image */
+    padding: 20px; /* Add padding inside the card body */
+    border-radius: 8px; /* Rounded corners for the card body */
+    width: 100%; /* Set fixed width equal to the post-card width */
+    display: flex; /* Add display flex to center content */
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+  }
+
+/* Styles for the post boxes */
+.post-box {
+    width: 300px; /* Set the desired width for your squared post boxes */
+    height: 300px; /* Set the desired height for your squared post boxes */
+    margin: 10px; /* Adjust spacing between post boxes as needed */
+  }
+  
+
 a {
     font-weight: 500;
     color: #646cff;

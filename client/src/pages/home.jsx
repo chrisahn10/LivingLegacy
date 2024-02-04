@@ -27,7 +27,7 @@ export default function Home() {
         {/* Color Blocks at the bottom with hover effect */}
         <div className="absolute bottom-0 w-full flex">
           {/* Connections Box */}
-          <Link to="/Events" className="w-1/3 h-24 flex justify-center items-center bg-[#EC3717] hover:opacity-75">
+          <Link to="/Feed" className="w-1/3 h-24 flex justify-center items-center bg-[#EC3717] hover:opacity-75">
             <p className="text-white text-base sm:text-2xl md:text-2xl lg:text-4xl font-bold">Connections</p>
           </Link>
           
