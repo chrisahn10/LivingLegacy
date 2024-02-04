@@ -8,7 +8,7 @@ import { QUERY_POSTS, QUERY_ME } from '../../utils/queries';
 import Auth from '../../utils/auth';
 
 const PostForm = () => {
-  const [postTitle, setPostTitle] = useState('');
+
   const [postContent, setPostContent] = useState('');
   const [characterCount, setCharacterCount] = useState(0);
 
@@ -28,14 +28,12 @@ const PostForm = () => {
     try {
       const { data } = await addPost({
         variables: {
-          postTitle,
           postContent,
           postAuthor: Auth.getProfile().data.username,
         },
       });
 
       setPostContent('');
-      setPostTitle('');
     } catch (err) {
       console.error(err);
     }
@@ -50,35 +48,12 @@ const PostForm = () => {
     }
   };
 
-  const handleTitleChange = (event) => {
-    const { name, value } = event.target;
-
-    if (name === 'postTitle' && value.length <= 50) {
-      setPostTitle(value);
-      setCharacterCount(value.length);
-    }
-  };
-
   return (
     <div>
       <h3>What's on your techy mind?</h3>
 
       {Auth.loggedIn() ? (
         <>
-          <form
-            className="flex-row justify-center justify-space-between-md align-center"
-            onSubmit={handleFormSubmit}
-          >
-            <div className="col-12 col-lg-9">
-              <textarea
-                name="postTitle"
-                placeholder="Title"
-                value={postTitle}
-                className="form-input w-100"
-                style={{ lineHeight: '1.5', resize: 'vertical' }}
-                onChange={handleTitleChange}
-              ></textarea>
-            </div>
           <p
             className={`m-0 ${
               characterCount === 280 || error ? 'text-danger' : ''
@@ -86,6 +61,11 @@ const PostForm = () => {
           >
             Character Count: {characterCount}/280
           </p>
+          <form
+            className="flex-row justify-center justify-space-between-md align-center"
+            onSubmit={handleFormSubmit}
+          >
+
             <div className="col-12 col-lg-9">
               <textarea
                 name="postContent"
