@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-import '../assets/css/Events.css';
 import beigeImage from '../assets/home/beige.jpg';
 
 function Events() {
@@ -35,4 +34,4 @@ function Events() {
   return <div>EventDetails page content or placeholder</div>;
 }
 
-export default Events;
+export default ;

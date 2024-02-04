@@ -7,7 +7,6 @@ import LoginForm from './pages/LoginForm'
 import SignupForm from './pages/SignupForm'
 import Home from './pages/home'
 import AboutUs from './pages/AboutUs'
-import Events from './pages/Events'
 
 
 const router = createBrowserRouter([
@@ -28,10 +27,6 @@ const router = createBrowserRouter([
       }, {
         path: '/AboutUs',
         element: <AboutUs />
-      },
-      {
-        path: '/Events',
-        element: <Events />,
       },
     ]
   }
