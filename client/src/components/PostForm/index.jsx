@@ -49,41 +49,37 @@ const PostForm = () => {
   };
 
   return (
-    <div>
-      <h3>What's on your techy mind?</h3>
+    <div className="container text-center">
+      <h3>Push the Culture! Use Your Voice</h3>
 
       {Auth.loggedIn() ? (
         <>
-          <p
-            className={`m-0 ${
-              characterCount === 280 || error ? 'text-danger' : ''
-            }`}
-          >
+          <p className={`m-0 ${characterCount === 280 || error ? 'text-danger' : ''}`}>
             Character Count: {characterCount}/280
           </p>
           <form
-            className="flex-row justify-center justify-space-between-md align-center"
+            className="d-flex flex-column align-items-center"
             onSubmit={handleFormSubmit}
           >
+            <div className="mb-3">
+            <textarea
+  name="postContent"
+  placeholder="Here's a new thought..."
+  value={postContent}
+  className="form-control"
+  style={{ minHeight: '150px', width: '35%' }} // Adjust the width here
+  onChange={handleChange}
+></textarea>
 
-            <div className="col-12 col-lg-9">
-              <textarea
-                name="postContent"
-                placeholder="Here's a new thought..."
-                value={postContent}
-                className="form-input w-100"
-                style={{ lineHeight: '1.5', resize: 'vertical' }}
-                onChange={handleChange}
-              ></textarea>
             </div>
 
-            <div className="col-12 col-lg-3">
-              <button className="btn btn-primary btn-block py-3" type="submit">
+            <div className="mb-3">
+              <button className="btn btn-primary" type="submit">
                 Add Post
               </button>
             </div>
             {error && (
-              <div className="col-12 my-3 bg-danger text-white p-3">
+              <div className="bg-danger text-white p-3">
                 {error.message}
               </div>
             )}
@@ -98,5 +94,6 @@ const PostForm = () => {
     </div>
   );
 };
+
 
 export default PostForm;

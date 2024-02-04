@@ -12,39 +12,28 @@ const PostList = ({
   }
 
   return (
-    <div>
+    <div className="text-center">
       {showTitle && <h3>{title}</h3>}
       {posts &&
         posts.map((post) => (
-          <div key={post._id} className="card mb-3">
+          <div key={post._id} className="card mb-3 mx-auto" style={{ maxWidth: '500px' }}>
             <h4 className="card-header bg-primary text-light p-2 m-0">
               {showUsername ? (
-                <Link
-                  className="text-light"
-                  to={`/profiles/${post.postAuthor}`}
-                >
-                  {post.postAuthor} <br />
-                  <span style={{ fontSize: '1rem' }}>
+                <Link className="text-light" to={`/profiles/${post.postAuthor}`}>
+                  <strong>{post.postAuthor}</strong> <br />
+                  <span style={{ fontSize: '1.2rem' }}>
                     had this thought on {post.createdAt}
                   </span>
                 </Link>
               ) : (
-                <>
-                  <span style={{ fontSize: '1rem' }}>
-                    You had this thought on {post.createdAt}
-                  </span>
-                </>
+                <span style={{ fontSize: '1.2rem' }}>
+                  You had this thought on {post.createdAt}
+                </span>
               )}
             </h4>
             <div className="card-body bg-light p-2">
-              <p>{post.postContent}</p>
+              <p style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>{post.postContent}</p>
             </div>
-            <Link
-              className="btn btn-primary btn-block btn-squared"
-              to={`/posts/${post._id}`}
-            >
-              Join the discussion on this thought.
-            </Link>
           </div>
         ))}
     </div>

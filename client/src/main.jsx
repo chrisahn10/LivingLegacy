@@ -9,6 +9,7 @@ import Home from './pages/home'
 import AboutUs from './pages/AboutUs'
 import Feed from './pages/Feed'
 import SinglePost from './pages/SinglePost';
+import Legacies from './pages/Legacies'
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,9 @@ const router = createBrowserRouter([
       }, {
         path: '/posts/:postId',
         element: <SinglePost />
+      }, {
+        path: '/Legacies',
+        element: <Legacies />
       }
     ]
   }

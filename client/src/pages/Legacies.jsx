@@ -1,50 +1,83 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+const apiKey = import.meta.env.VITE_SOME_KEY;
+const apiUrl = "https://api.openai.com/v1/chat/completions"
+function Legacies() {
+  const [messages, setMessages] = useState([]); // State to store chat messages
+  const [input, setInput] = useState(''); // State to store user input
+  const [loading, setLoading] = useState(false); // State to track loading state
 
-const Legacies = () => {
-  const [input, setInput] = useState('');
-  const [response, setResponse] = useState('');
+  useEffect(() => {
+    // Initial message when the component mounts
+    addMessage('ChatGPT', 'Hello! I am Dr. Martin Luther King Jr. How can I assist you today?');
+  }, []);
 
-  // Function to handle sending the query to the ChatGPT API
-  const askQuestion = async (question) => {
-    try {
-      const data = {
-        model: "text-davinci-003", // You can choose a model suited for your needs
-        prompt: `You are Martin Luther King Jr. ${question}`, // Adjust the prompt as needed
-        temperature: 0.5,
-        max_tokens: 100,
-      };
-
-      const options = {
-        headers: {
-          'Authorization': `Bearer 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`, // Replace with your actual API key
-        },
-      };
-
-      const response = await axios.post('https://api.openai.com/v1/completions', data, options);
-      setResponse(response.data.choices[0].text.trim());
-    } catch (error) {
-      console.error('Error calling OpenAI API:', error);
-      setResponse('Sorry, there was an error processing your request.');
-    }
+  const addMessage = (role, content) => {
+    setMessages([...messages, { role, content }]);
   };
 
+  const handleInputChange = (e) => {
+    setInput(e.target.value);
+  };
+
+  const handleSendMessage = async () => {
+    if (input.trim() === '') return; // Don't send empty messages
+
+    // Add user message to the chat
+    addMessage('User', input);
+    console.log(input)
+    // Set loading state while waiting for a response
+    setLoading(true);
+
+    // Make an API call to a ChatGPT service to get a response
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${apiKey}`,
+        },
+        body: JSON.stringify({
+          prompt: input,
+          max_tokens: 50, // Adjust the number of tokens as needed
+        }),
+      });
+
+      // Add the ChatGPT response to the chat
+      addMessage('ChatGPT', response.choices[0].data.response);
+
+      // Clear the input field and reset loading state
+      setInput('');
+      setLoading(false);
+    } catch (error) {
+      console.error('Error sending message:', error);
+      setLoading(false);
+    }
+  };
+  const centerContentStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '100vh', // Adjust the height as needed
+  };
   return (
-    <div>
-      <h2>Ask Martin Luther King Jr. a Question</h2>
-      <input
-        type="text"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        placeholder="Ask a question"
-      />
-      <button onClick={() => askQuestion(input)}>Ask</button>
+    <div style={centerContentStyle}>
       <div>
-        <p>Response:</p>
-        <p>{response}</p>
+        {messages.map((message, index) => (
+          <div key={index} className={message.role}>
+            {message.content}
+          </div>
+        ))}
+      </div>
+      <div>
+        <input type="text" value={input} onChange={handleInputChange} />
+        <button onClick={handleSendMessage} disabled={loading}>
+          Send
+        </button>
       </div>
     </div>
   );
-};
+}
 
 export default Legacies;
