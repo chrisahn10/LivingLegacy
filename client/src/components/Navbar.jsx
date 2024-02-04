@@ -38,7 +38,7 @@ const Navbar = () => {
         {/* LL Logo */}
 
         <div className="flex items-center align-center">
-          <a href="/"><img src={LLegacyImage} alt="Living Legacy" className="h-14 mr-3 mb-3" style={{ width: "300px", height: "80px" }} /></a>
+          <a href="/"><img src={LLegacyImage} alt="Living Legacy" className="h-14 mr-3 mb-3" style={{ width: "300px", height: "70px" }} /></a>
         </div>
 
         {/* DESKTOP NAVBAR */}
