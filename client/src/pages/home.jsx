@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import contactImage from '../assets/home/contact.jpg'; 
 import crowdImage from '../assets/home/crowd.jpeg'; 
 
 export default function Home() {
@@ -44,14 +43,14 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Craftsmen Section */}
+      {/* Crowd Section */}
       <div className="relative bg-cover bg-center" 
            style={{ height: 'calc(100vh - 100px)', backgroundImage: `url(${crowdImage})`}}>
         {/* ... Craftsmen Content ... */}
 
         {/* Color Block at the bottom with hover effect */}
         <div className="absolute bottom-0 w-full flex">
-          <Link to="/Events" className="w-full h-24 flex justify-center items-center bg-[#0dafec] hover:opacity-75">
+          <Link to="/Events" className="w-full h-24 flex justify-center items-center bg-[#7B583D] hover:opacity-75">
             <p className="text-white text-xl font-bold">CONNECT</p>
           </Link>
         </div>
@@ -64,21 +63,16 @@ export default function Home() {
 
         {/* Color Block at the bottom with hover effect */}
         <div className="absolute bottom-0 w-full flex">
-          <Link to="/FacilityTour" className="w-full h-24 flex justify-center items-center bg-[#0dafec] hover:opacity-75">
+          <Link to="/FacilityTour" className="w-full h-24 flex justify-center items-center bg-[#7B583D] hover:opacity-75">
             <p className="text-white text-xl font-bold">CHAT WITH LEGACIES</p>
           </Link>
         </div>
       </div>
 
       {/* Contact Section */}
-      <div className="relative bg-cover bg-center" 
-           style={{ height: 'calc(100vh - 100px)', backgroundImage: `url(${contactImage})` }}>
-        <div className="absolute bottom-0 w-full flex">
-          <div className="w-full h-24 flex justify-center items-center bg-[#0dafec]">
-            <p className="text-white text-xl font-bold text-center">CONTACT US BY CLICKING OUR NAMES AT THE BOTTOM!</p>
-          </div>
-        </div>
+      <div className="w-full h-12 flex justify-center items-center bg-[#B59F84]">
+      <p className="text-white text-xl font-bold text-center">Contact us by clicking our names at the!</p>
       </div>
-      </div>
+    </div>
   );
 }

@@ -6,7 +6,7 @@ import {
   createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom'; // Import useLocation
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 
@@ -38,12 +38,14 @@ const client = new ApolloClient({
 });
 
 function App() {
+  const location = useLocation(); // Get the current location
+
   return (
     <ApolloProvider client={client}>
       <ThemeProvider>
-      <Navbar />
-      <Outlet />
-      <Footer />
+        <Navbar />
+        <Outlet />
+        {location.pathname === '/' && <Footer />} {/* Conditionally render Footer on the home page */}
       </ThemeProvider>
     </ApolloProvider>
   );
