@@ -9,8 +9,7 @@ export const QUERY_USER = gql`
       posts {
         _id
         postContent
-        date
-        time
+        createdAt
       }
     }
   }
@@ -22,15 +21,7 @@ export const QUERY_POSTS = gql`
       _id
       postContent
       postAuthor
-      date
-      time
-      comments {
-        _id
-        commentContent
-        commentAuthor
-        date
-        time
-      }
+      createdAt
     }
   }
 `;
@@ -41,14 +32,12 @@ export const QUERY_SINGLE_POST = gql`
       _id
       postContent
       postAuthor
-      date
-      time
+      createdAt
       comments {
         _id
         commentContent
         commentAuthor
-        date
-        time
+        createdAt
       }
     }
   }
@@ -64,8 +53,7 @@ export const QUERY_ME = gql`
         _id
         postContent
         postAuthor
-        date
-        time
+        createdAt
       }
     }
   }

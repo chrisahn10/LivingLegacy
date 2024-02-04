@@ -5,13 +5,7 @@ const { signToken, AuthenticationError } = require('../utils/auth.js')
 const resolvers = {
   Query: {
     users: async () => {
-      try {
-        const users = await User.find();
-        return users;
-      } catch (error) {
-        console.error(error);
-        throw new Error('Failed to fetch all users');
-      }
+      return User.find().populate('posts');
     },
     user: async (parent, { username }) => {
       return User.findOne({ username }).populate('posts');
@@ -33,14 +27,8 @@ const resolvers = {
   },
   Mutation: {
     addUser: async (parent, { username, email, password }) => {
-      // Create a user
-      console.log("the addUser mutation was called")
       const user = await User.create({ username, email, password });
-      console.log("we awaited User and created one", user)
-      // To reduce friction for the user, we immediately sign a JSON Web Token and log the user in after they are created
       const token = signToken(user);
-      console.log(user);
-      // Return an `Auth` object that consists of the signed token and user's information
       return { token, user };
     },
     login: async (parent, { email, password }) => {
@@ -61,19 +49,30 @@ const resolvers = {
       return { token, user };
     },
 
-    addPost: async (_, { userId, postTitle, postContent }) => {
-      let newPost = new Post({ user: userId, postTitle, postContent });
-      await newPost.save();
-      newPost = await Post.findById(newPost._id).populate('user'); // Re-fetch the post with user populated
-      return newPost;
+    addPost: async (parent, { postContent }, context) => {
+      if (context.user) {
+        const post = await Post.create({
+          postContent,
+          postAuthor: context.user.username,
+        });
+
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { posts: post._id } }
+        );
+
+        return post;
+      }
+      throw AuthenticationError;
+      ('You need to be logged in!');
     },
     addComment: async (parent, { postId, commentContent }, context) => {
       if (context.user) {
-        return Thought.findOneAndUpdate(
+        return Post.findOneAndUpdate(
           { _id: postId },
           {
             $addToSet: {
-              comments: { commentContent, user: context.user.username },
+              comments: { commentContent, commentAuthor: context.user.username },
             },
           },
           {

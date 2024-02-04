@@ -9,17 +9,19 @@ db.once('open', async () => {
     await cleanDB('Post', 'posts');
     await cleanDB('User', 'users');
 
-    const createdUsers = await User.insertMany(userData);
+    await User.create(userData);
 
-    // Dynamically update postData with user IDs from createdUsers
-    const updatedPosts = postData.map((post, index) => {
-      // This is a simplistic approach; you might need to map users more carefully based on your data structure
-      const userIdIndex = index % createdUsers.length; // Just an example to assign user IDs cyclically
-      post.user = createdUsers[userIdIndex]._id;
-      return post;
-    });
-    await Post.insertMany(updatedPosts);
-
+    for (let i = 0; i < postData.length; i++) {
+      const { _id, postAuthor } = await Post.create(postData[i]);
+      const user = await User.findOneAndUpdate(
+        { username: postAuthor },
+        {
+          $addToSet: {
+            posts: _id,
+          },
+        }
+      );
+    }
   } catch (err) {
     console.error(err);
     process.exit(1);

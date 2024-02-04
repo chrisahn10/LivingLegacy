@@ -1,13 +1,11 @@
-import PostFeed from '../components/PostFeed';
-import PostForm from '../components/PostForm';
 import { useQuery } from '@apollo/client';
-import { useNavigate } from 'react-router-dom';
-import beigeImage from '../assets/home/beige.jpg';
+import PostList from '../components/PostList';
+import PostForm from '../components/PostForm';
 import { QUERY_POSTS } from '../utils/queries';
 
-function Feed () {
+const Feed = () => {
   const { loading, data } = useQuery(QUERY_POSTS);
-  const posts = data?.thoughts || [];
+  const posts = data?.posts || [];
 
   return (
     <main>
@@ -22,7 +20,7 @@ function Feed () {
           {loading ? (
             <div>Loading...</div>
           ) : (
-            <PostFeed
+            <PostList
               posts={posts}
               title="Some Feed for Thought(s)..."
             />

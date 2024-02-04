@@ -2,38 +2,29 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 
-import { ADD_POST } from '../../utils/mutations';
-import { QUERY_POSTS, QUERY_ME } from '../../utils/queries';
+import { ADD_COMMENT } from '../../utils/mutations';
 
 import Auth from '../../utils/auth';
 
-const PostForm = () => {
-
-  const [postContent, setPostContent] = useState('');
+const CommentForm = ({ postId }) => {
+  const [commentContent, setCommentContent] = useState('');
   const [characterCount, setCharacterCount] = useState(0);
 
-  const [addPost, { error }] = useMutation
-  (ADD_POST, {
-    refetchQueries: [
-      QUERY_POSTS,
-      'getPosts',
-      QUERY_ME,
-      'me'
-    ]
-  });
+  const [addComment, { error }] = useMutation(ADD_COMMENT);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      const { data } = await addPost({
+      const { data } = await addComment({
         variables: {
-          postContent,
-          postAuthor: Auth.getProfile().data.username,
+          postId,
+          commentContent,
+          commentAuthor: Auth.getProfile().data.username,
         },
       });
 
-      setPostContent('');
+      setCommentContent('');
     } catch (err) {
       console.error(err);
     }
@@ -42,15 +33,15 @@ const PostForm = () => {
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    if (name === 'postContent' && value.length <= 280) {
-      setPostContent(value);
+    if (name === 'commentContent' && value.length <= 280) {
+      setCommentContent(value);
       setCharacterCount(value.length);
     }
   };
 
   return (
     <div>
-      <h3>What's on your techy mind?</h3>
+      <h4>What are your thoughts on this thought?</h4>
 
       {Auth.loggedIn() ? (
         <>
@@ -60,17 +51,17 @@ const PostForm = () => {
             }`}
           >
             Character Count: {characterCount}/280
+            {error && <span className="ml-2">{error.message}</span>}
           </p>
           <form
             className="flex-row justify-center justify-space-between-md align-center"
             onSubmit={handleFormSubmit}
           >
-
             <div className="col-12 col-lg-9">
               <textarea
-                name="postContent"
-                placeholder="Here's a new thought..."
-                value={postContent}
+                name="commentContent"
+                placeholder="Add your comment..."
+                value={commentContent}
                 className="form-input w-100"
                 style={{ lineHeight: '1.5', resize: 'vertical' }}
                 onChange={handleChange}
@@ -79,14 +70,9 @@ const PostForm = () => {
 
             <div className="col-12 col-lg-3">
               <button className="btn btn-primary btn-block py-3" type="submit">
-                Add Post
+                Add Comment
               </button>
             </div>
-            {error && (
-              <div className="col-12 my-3 bg-danger text-white p-3">
-                {error.message}
-              </div>
-            )}
           </form>
         </>
       ) : (
@@ -99,4 +85,4 @@ const PostForm = () => {
   );
 };
 
-export default PostForm;
+export default CommentForm;

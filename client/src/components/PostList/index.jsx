@@ -2,17 +2,18 @@ import { Link } from 'react-router-dom';
 
 const PostList = ({
   posts,
-  postTitle,
+  title,
   showTitle = true,
   showUsername = true,
 }) => {
   if (!posts.length) {
+    console.log(posts)
     return <h3>No Posts Yet</h3>;
   }
 
   return (
     <div>
-      {showTitle && <h3>{postTitle}</h3>}
+      {showTitle && <h3>{title}</h3>}
       {posts &&
         posts.map((post) => (
           <div key={post._id} className="card mb-3">
@@ -24,23 +25,23 @@ const PostList = ({
                 >
                   {post.postAuthor} <br />
                   <span style={{ fontSize: '1rem' }}>
-                    had this thought on {post.date}
+                    had this thought on {post.createdAt}
                   </span>
                 </Link>
               ) : (
                 <>
                   <span style={{ fontSize: '1rem' }}>
-                    You had this thought on {post.date}
+                    You had this thought on {post.createdAt}
                   </span>
                 </>
               )}
             </h4>
             <div className="card-body bg-light p-2">
-              <p>{post.thoughtText}</p>
+              <p>{post.postContent}</p>
             </div>
             <Link
               className="btn btn-primary btn-block btn-squared"
-              to={`/thoughts/${post._id}`}
+              to={`/posts/${post._id}`}
             >
               Join the discussion on this thought.
             </Link>
