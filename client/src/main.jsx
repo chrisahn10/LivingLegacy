@@ -8,6 +8,7 @@ import SignupForm from './pages/SignupForm'
 import Home from './pages/home'
 import AboutUs from './pages/AboutUs'
 import Feed from './pages/Feed'
+import SinglePost from './pages/SinglePost';
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,9 @@ const router = createBrowserRouter([
       }, {
         path: '/Feed',
         element: <Feed />
+      }, {
+        path: '/posts/:postId',
+        element: <SinglePost />
       }
     ]
   }
