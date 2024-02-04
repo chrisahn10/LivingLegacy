@@ -21,12 +21,12 @@ export default function Home() {
     <div>
       {/* Hero Section with Container */}
       <div className="relative bg-cover bg-center" 
-          style={{ height: 'calc(100vh - 100px)', backgroundImage: `url(${Image1})`,  }}>
+          style={{ height: 'calc(80vh - 100px)', backgroundImage: `url(${Image1})`,  }}>
         {/* ... Hero Content ... */}
 
         {/* Color Blocks at the bottom with hover effect */}
         <div className="absolute bottom-0 w-full flex">
-          {/* Block 1 */}
+          {/* Connections Box */}
           <Link to="/Events" className="w-1/3 h-24 flex justify-center items-center bg-[#EC3717] hover:opacity-75">
             <p className="text-white text-base sm:text-2xl md:text-2xl lg:text-4xl font-bold">Connections</p>
           </Link>
@@ -36,7 +36,7 @@ export default function Home() {
             <p className="text-white text-base sm:text-2xl md:text-2xl lg:text-4xl font-bold">Chat Bot</p>
           </Link>
           
-          {/* Block 3 */}
+          {/* Sign Up Box */}
           <Link to="/Signup" className="w-1/3 h-24 flex justify-center items-center bg-[#54BD13] hover:opacity-75">
     <p className="text-white text-base sm:text-2xl md:text-2xl lg:text-4xl font-bold">SIGN UP NOW</p>
 </Link>
@@ -45,7 +45,7 @@ export default function Home() {
 
       {/* Crowd Section */}
       <div className="relative bg-cover bg-center" 
-           style={{ height: 'calc(100vh - 100px)', backgroundImage: `url(${crowdImage})`}}>
+           style={{ height: 'calc(80vh - 100px)', backgroundImage: `url(${crowdImage})`}}>
         {/* ... Craftsmen Content ... */}
 
         {/* Color Block at the bottom with hover effect */}
@@ -58,7 +58,7 @@ export default function Home() {
 
       {/* Legacy Section */}
       <div className="relative bg-cover bg-center" 
-           style={{ height: 'calc(100vh - 100px)', backgroundImage: `url(${Image2})`, backgroundSize: '70%' }}>
+           style={{ height: 'calc(80vh - 100px)', backgroundImage: `url(${Image2})`, backgroundSize: '70%' }}>
         {/* ... Tour Content ... */}
 
         {/* Color Block at the bottom with hover effect */}
