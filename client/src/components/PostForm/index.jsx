@@ -10,7 +10,6 @@ import Auth from '../../utils/auth';
 const PostForm = () => {
   const [postTitle, setPostTitle] = useState('');
   const [postContent, setPostContent] = useState('');
-
   const [characterCount, setCharacterCount] = useState(0);
 
   const [addPost, { error }] = useMutation
@@ -31,7 +30,7 @@ const PostForm = () => {
         variables: {
           postTitle,
           postContent,
-          thoughtAuthor: Auth.getProfile().data.username,
+          postAuthor: Auth.getProfile().data.username,
         },
       });
 
@@ -100,7 +99,7 @@ const PostForm = () => {
 
             <div className="col-12 col-lg-3">
               <button className="btn btn-primary btn-block py-3" type="submit">
-                Add Thought
+                Add Post
               </button>
             </div>
             {error && (

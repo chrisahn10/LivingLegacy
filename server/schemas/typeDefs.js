@@ -2,30 +2,25 @@ const typeDefs = `#graphql
 
 type User {
   _id: ID
-  username: String!
-  email: String!
-  password: String!
-  posts: [Post]
+  username: String
+  email: String
+  password: String
+  posts: [Post]!
 }
 
 type Post {
   _id: ID
-  postTitle: String!
-  postContent: String!
+  postContent: String
   postAuthor: String
-  date: String
-  time: String
-  comments: [Comment]
-  likes: [User]
+  createdAt: String
+  comments: [Comment]!
 }
 
 type Comment {
   _id: ID
-  commentContent: String!
+  commentContent: String
   commentAuthor: String
-  date: String
-  time: String
-  likes: [User]
+  createdAt: String
 }
 
 type Auth {
@@ -38,7 +33,7 @@ type Auth {
 type Query {
   users: [User]
   user(username: String!): User
-  posts: [Post]
+  posts(username: String): [Post]
   post(postId: ID!): Post
   me: User
 }

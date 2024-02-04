@@ -8,12 +8,6 @@ class AuthService {
     return decode(this.getToken());
   }
   
-  useAuth() {
-    const token = this.getToken();
-    const user = token ? decode(token) : null;
-
-    return user;
-  }
   // check if user's logged in
   loggedIn() {
     // Checks if there is a saved token and it's still valid

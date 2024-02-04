@@ -1,8 +1,5 @@
 const bcrypt = require('bcrypt');
-const mongoose = require('mongoose');
-const { Schema, model } = mongoose;
-
-const ObjectId = Schema.Types.ObjectId;
+const { Schema, model } = require('mongoose');
 
 const userSchema = new Schema(
   {
@@ -24,7 +21,12 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    userPosts: [{ type: ObjectId, ref: 'Post' }],
+    posts: [
+      { 
+        type: Schema.Types.ObjectId,
+        ref: 'Post',
+       },
+      ],
   },
   // set this to use virtual below
   {
