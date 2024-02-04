@@ -11,7 +11,7 @@ function Events() {
   // Check if there's an eventId in the URL
   const isEventDetailsPage = window.location.pathname.split('/').length === 3;
 
-  const backgroundImageStyle = {
+const backgroundImageStyle = {
     backgroundImage: `url(${beigeImage})`,
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
