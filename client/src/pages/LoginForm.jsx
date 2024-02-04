@@ -53,18 +53,18 @@ const LoginForm = () => {
 
   return (
     <>
-      <div className='bg-contain' style={{ backgroundImage: 'url(../src/assets/home/loginHero.jpg)' }}>
+      <div className='bg-contain' style={{ backgroundImage: 'url(../src/assets/home/beige.jpg)' }}>
       <Card color="transparent" shadow={false} className="flex justify-center items-center p-10">
         <div className="rounded-lg shadow-2xl p-4 bg-gray-200/60">
-        <Typography variant="h4" color="blue-gray" className="font-Bree text-green-500">
+        <Typography variant="h4" color="black" className="font-Concert One text-black">
           Log In
         </Typography>
-        <Typography color="gray" className="mt-1 font-normal">
+        <Typography color="black" className="mt-1 font-Concert One">
           Sign up or log in to talk to legacies!
         </Typography>
         <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
           <div className="mb-1 flex flex-col gap-6">
-            <Typography variant="h6" color="blue-gray" className="-mb-3">
+            <Typography variant="h6" color="black" className="font-Concert One -mb-3">
               Email
             </Typography>
             <Input
@@ -79,7 +79,7 @@ const LoginForm = () => {
               }}
            
             />
-            <Typography variant="h6" color="blue-gray" className="-mb-3">
+            <Typography variant="h6" color="black" className="font-Concert One -mb-3">
               Password
             </Typography>
             <Input
@@ -107,9 +107,9 @@ const LoginForm = () => {
           >
             Log in
           </Button>
-          <Typography color="gray" className="mt-4 text-center font-normal">
+          <Typography color="black" className="mt-4 text-center font-Concert One">
             Don't have an account yet?&nbsp;&nbsp;
-            <a href="/signup" className="font-bold text-green-500 underline">
+            <a href="/signup" className="font-bold text-orange-500 underline">
               Sign Up
             </a>
           </Typography>

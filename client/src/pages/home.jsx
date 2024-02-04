@@ -32,7 +32,7 @@ export default function Home() {
           </Link>
           
           {/* Chat Bot */}
-          <Link to="/Create an event" className="w-1/3 h-24 flex justify-center items-center bg-[#FE891B] hover:opacity-75">
+          <Link to="/Legacies" className="w-1/3 h-24 flex justify-center items-center bg-[#FE891B] hover:opacity-75">
             <p className="text-white text-base sm:text-2xl md:text-2xl lg:text-4xl font-bold">Chat Bot</p>
           </Link>
           

@@ -69,9 +69,9 @@ const Navbar = () => {
             <>
               <NavLink
                 className="nav-link"
-                to="../EventCreateForm"
+                to="../Legacies"
               >
-                Create an Event
+                Legacies
               </NavLink>
               <Button
                 onClick={handleLogout}
