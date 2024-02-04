@@ -32,7 +32,7 @@ export default function Home() {
           </Link>
           
           {/* Chat Bot */}
-          <Link to="/Vendors" className="w-1/3 h-24 flex justify-center items-center bg-[#FE891B] hover:opacity-75">
+          <Link to="/Create an event" className="w-1/3 h-24 flex justify-center items-center bg-[#FE891B] hover:opacity-75">
             <p className="text-white text-base sm:text-2xl md:text-2xl lg:text-4xl font-bold">Chat Bot</p>
           </Link>
           
@@ -63,8 +63,8 @@ export default function Home() {
 
         {/* Color Block at the bottom with hover effect */}
         <div className="absolute bottom-0 w-full flex">
-          <Link to="/FacilityTour" className="w-full h-24 flex justify-center items-center bg-[#7B583D] hover:opacity-75">
-            <p className="text-white text-xl font-bold">CHAT WITH LEGACIES</p>
+          <Link to="/Feed" className="w-full h-24 flex justify-center items-center bg-[#7B583D] hover:opacity-75">
+            <p className="text-white text-xl font-bold">Check our your feed!</p>
           </Link>
         </div>
       </div>
