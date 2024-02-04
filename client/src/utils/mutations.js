@@ -25,20 +25,37 @@ export const ADD_USER = gql`
   }
 `;
 
-export const SAVE_EVENT = gql`
-mutation SaveEvent($event: EventInput!) {
-  saveEvent(event: $event) {
-    _id
-    username
-    email
-    savedEvents {
+
+export const ADD_POST = gql`
+  mutation addPost($postContent: String!) {
+    addPost(postContent: $postContent) {
       _id
-      title
+      postContent
+      postAuthor
       date
       time
-      description
-      image
+      comments {
+        _id
+        commentContent
+      }
     }
   }
-}
+`;
+
+export const ADD_COMMENT = gql`
+  mutation addComment($postId: ID!, $commentContent: String!) {
+    addComment(postId: $postId, commentContent: $commentContent) {
+      _id
+      postContent
+      postAuthor
+      date
+      time
+      comments {
+        _id
+        commentContent
+        date
+        time
+      }
+    }
+  }
 `;

@@ -1,37 +1,14 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client';
 
-// Query to fetch events
-export const GET_EVENTS = gql`
-query EventsFromAllUsers {
-  eventsFromAllUsers {
-    _id
-    title
-    date
-    time
-    description
-    image
-  }
-}
-`;
-
-// Query to fetch vendors
-export const GET_ALL_USERS = gql`
-  query AllUsers {
-    allUsers {
+export const QUERY_USER = gql`
+  query user($username: String!) {
+    user(username: $username) {
       _id
       username
       email
-      savedEvents {
+      posts {
         _id
-        title
-        date
-        time
-        description
-        image
-      }
-      savedDemos {
-        _id
-        demotitle
+        postContent
         date
         time
       }
@@ -39,15 +16,57 @@ export const GET_ALL_USERS = gql`
   }
 `;
 
-export const GET_EVENT_DETAILS = gql`
-  query EventDetails($eventId: ID!) {
-    eventDetails(eventId: $eventId) {
+export const QUERY_POSTS = gql`
+  query getPosts {
+    posts {
       _id
-      title
+      postContent
+      postAuthor
       date
       time
-      description
-      image
+      comments {
+        _id
+        commentContent
+        commentAuthor
+        date
+        time
+      }
+    }
+  }
+`;
+
+export const QUERY_SINGLE_POST = gql`
+  query getSinglePost($postId: ID!) {
+    post(postId: $postId) {
+      _id
+      postContent
+      postAuthor
+      date
+      time
+      comments {
+        _id
+        commentContent
+        commentAuthor
+        date
+        time
+      }
+    }
+  }
+`;
+
+export const QUERY_ME = gql`
+  query me {
+    me {
+      _id
+      username
+      email
+      posts {
+        _id
+        postContent
+        postAuthor
+        date
+        time
+      }
     }
   }
 `;

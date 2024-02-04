@@ -13,6 +13,9 @@ const resolvers = {
         throw new Error('Failed to fetch all users');
       }
     },
+    user: async (parent, { username }) => {
+      return User.findOne({ username }).populate('posts');
+    },
     posts: async () => {
       try {
         const posts = await Post.find();
@@ -21,6 +24,15 @@ const resolvers = {
         console.error(error);
         throw new Error('Failed to fetch all posts');
       }
+    },
+    post: async (parent, { postId }) => {
+      return Post.findOne({ _id: postId });
+    },
+    me: async (parent, args, context) => {
+      if (context.user) {
+        return User.findOne({ _id: context.user._id }).populate('posts');
+      }
+      throw AuthenticationError;
     },
 
   },
