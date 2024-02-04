@@ -1,9 +1,8 @@
-import AuthService from '../utils/auth';
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Auth from '../utils/auth';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../utils/mutations";
-import { useNavigate } from 'react-router-dom';
 import {
   Card,
   Input,
@@ -12,71 +11,37 @@ import {
 } from "@material-tailwind/react";
 
 const SignupForm = () => {
-  const navigate = useNavigate();
   const [formState, setFormState] = useState({
     username: '',
     email: '',
-    password: ''
+    password: '',
   });
-  const [validated, setValidated] = useState(false);
-  const [showAlert, setShowAlert] = useState(false);
-
   const [addUser, { error, data }] = useMutation(ADD_USER);
 
-  const handleInputChange = (event) => {
+  const handleChange = (event) => {
     const { name, value } = event.target;
+
     setFormState({
       ...formState,
-      [name]: value
+      [name]: value,
     });
   };
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+    console.log(formState);
 
-    const form = event.currentTarget;
+    try {
+      const { data } = await addUser({
+        variables: { ...formState },
+      });
 
-    if (form.checkValidity() === false) {
-      event.stopPropagation();
-    } else {
-      try {
-        const { data } = await addUser({
-          variables: { ...formState }
-        });
-
-        // Log the data to the console to inspect its structure
-        console.log('Data from server:', data);
-
-        // Assuming your server response has a structure like { addUser: { token: 'your_token', user: { _id, username } } }
-        const { token, user } = data.addUser;
-
-        // Store the token in your authentication system (e.g., localStorage, cookies, etc.)
-        // This depends on how you've implemented your Auth system
-        AuthService.login(token);
-
-        // Clear form values
-        setFormState({
-          username: user.username,
-          email: formState.email,
-          password: formState.password,
-        });
-
-        // Redirect to the login page upon successful signup
-        navigate.push('/login');
-
-        // Logout to clear the token from client storage
-        AuthService.logout();
-      } catch (error) {
-        console.error(error);
-
-        // Handle the error (show an error message, etc.)
-        setShowAlert(`Error: ${error.message}`);
-      }
-      console.log('After signup code');
+      Auth.login(data.addUser.token);
+    } catch (e) {
+      console.error(e);
     }
-
-    setValidated(true);
   };
+
 
   return (
     <>
@@ -104,7 +69,7 @@ const SignupForm = () => {
                 size="lg"
                 placeholder="Enter your name"
                 value={formState.username}
-                onChange={handleInputChange}
+                onChange={handleChange}
                 name="username"
                 className="bg-white !border-t-blue-gray-200 focus:!border-t-gray-900"
                 labelProps={{
@@ -124,7 +89,7 @@ const SignupForm = () => {
                 size="lg"
                 placeholder="Enter your email"
                 value={formState.email}
-                onChange={handleInputChange}
+                onChange={handleChange}
                 name="email"
                 className="bg-white !border-t-blue-gray-200 focus:!border-t-gray-900"
                 labelProps={{
@@ -144,7 +109,7 @@ const SignupForm = () => {
                 size="lg"
                 placeholder="********"
                 value={formState.password}
-                onChange={handleInputChange}
+                onChange={handleChange}
                 name="password"
                 className="bg-white !border-t-blue-gray-200 focus:!border-t-gray-900"
                 id='password'
@@ -197,15 +162,5 @@ const SignupForm = () => {
   );
 };
 
-const App = () => {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/signup" element={<SignupForm />} />
-        <Route path="/login" element={<LoginForm />} />
-      </Routes>
-    </Router>
-  );
-};
 
 export default SignupForm;

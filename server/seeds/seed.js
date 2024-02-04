@@ -1,9 +1,7 @@
 const db = require('../config/connection');
 const { Post, User } = require('../models');
-
 const postData = require('./postData.json');
 const userData = require('./userData.json');
-
 const cleanDB = require('./cleanDB');
 
 db.once('open', async () => {

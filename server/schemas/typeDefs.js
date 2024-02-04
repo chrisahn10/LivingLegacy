@@ -1,45 +1,56 @@
 const typeDefs = `#graphql
 
 type User {
-  id: ID!
+  id: ID
   username: String!
   email: String!
+  password: String!
   posts: [Post]
 }
 
 type Post {
-  id: ID!
+  _id: ID
   postTitle: String!
   postContent: String!
+  postAuthor: String
   date: String
   time: String
-  user: User!
-  likes: [User]
   comments: [Comment]
+  likes: [User]
 }
 
 type Comment {
-  id: ID!
+  _id: ID
   commentContent: String!
+  commentAuthor: String
   date: String
   time: String
-  user: User!
+  likes: [User]
 }
+
+type Auth {
+  token: ID!
+  user: User
+}
+
 
 # Queries
 type Query {
   users: [User]
+  user(username: String!): User
   posts: [Post]
-  user(id: ID!): User
-  post(id: ID!): Post
+  post(postId: ID!): Post
+  me: User
 }
 
 # Mutations
 type Mutation {
-  createUser(username: String!, email: String!, password: String!): User
-  createPost(userId: ID!, postTitle: String!, postContent: String!): Post
-  updateUser(id: ID!, username: String, email: String): User
-  deletePost(id: ID!): Post
+  addUser(username: String!, email: String!, password: String!): Auth
+  login(email: String!, password: String!): Auth 
+  addPost(postContent: String!): Post
+  addComment(postId: ID!, commentContent: String!): Post
+  removePost(postId: ID!): Post
+  removeComment(postId: ID!, commentId: ID!): Post
 }
 `;
 

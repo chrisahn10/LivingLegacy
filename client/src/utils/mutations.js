@@ -1,4 +1,4 @@
-import { gql, useMutation } from '@apollo/client';
+import { gql } from '@apollo/client';
 
 // Define mutation
 export const LOGIN_USER = gql`
@@ -24,6 +24,7 @@ export const ADD_USER = gql`
     }
   }
 `;
+
 export const SAVE_EVENT = gql`
 mutation SaveEvent($event: EventInput!) {
   saveEvent(event: $event) {

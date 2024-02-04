@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const Post = require('../models/Post');
+const { signToken, AuthenticationError } = require('../utils/auth.js')
 
 const resolvers = {
   Query: {
@@ -24,38 +25,76 @@ const resolvers = {
 
   },
   Mutation: {
-    createUser: async (_, { username, email, password }) => {
-      const newUser = new User({ username, email, password });
-      await newUser.save();
-      return newUser;
+    addUser: async (parent, { username, email, password }) => {
+      // Create a user
+      const user = await User.create({ username, email, password });
+      // To reduce friction for the user, we immediately sign a JSON Web Token and log the user in after they are created
+      const token = signToken(user);
+      console.log(user);
+      // Return an `Auth` object that consists of the signed token and user's information
+      return { token, user };
     },
-    createPost: async (_, { userId, postTitle, postContent }) => {
+    login: async (parent, { email, password }) => {
+      const user = await User.findOne({ email });
+
+      if (!user) {
+        throw AuthenticationError;
+      }
+
+      const correctPw = await user.isCorrectPassword(password);
+
+      if (!correctPw) {
+        throw new AuthenticationError;
+      }
+
+      const token = signToken(user);
+
+      return { token, user };
+    },
+
+    addPost: async (_, { userId, postTitle, postContent }) => {
       let newPost = new Post({ user: userId, postTitle, postContent });
       await newPost.save();
       newPost = await Post.findById(newPost._id).populate('user'); // Re-fetch the post with user populated
       return newPost;
     },
-    
-    updateUser: async (_, { id, username, email }) => {
-      const updatedUser = await User.findByIdAndUpdate(
-        id,
-        { username, email },
-        { new: true }
-      );
-      return updatedUser;
+    addComment: async (parent, { postId, commentContent }, context) => {
+      if (context.user) {
+        return Thought.findOneAndUpdate(
+          { _id: postId },
+          {
+            $addToSet: {
+              comments: { commentContent, user: context.user.username },
+            },
+          },
+          {
+            new: true,
+            runValidators: true,
+          }
+        );
+      }
+      throw new AuthenticationError;
     },
-    deletePost: async (_, { id }) => {
+    removePost: async (_, { id }) => {
       return await Post.findByIdAndDelete(id);
     },
+    removeComment: async (parent, { id, commentId }, context) => {
+      if (context.user) {
+        return Post.findOneAndUpdate(
+          { commentId: id },
+          {
+            $pull: {
+              comments: {
+                commentId: id,
+                user: context.user.username,
+              },
+            },
+          },
+        )
+      }
+    }
   },
-  User: {
-    posts: (user) => Post.find({ user: user.id }),
-  },
-  Post: {
-    user: async (post) => {
-      return await User.findById(post.user);
-    },
-  },
+
   
 };
 
