@@ -6,7 +6,7 @@ function Vendors() {
     <div
       className="bg-cover"
       style={{
-        backgroundImage: `url(${beigeImage})`, // Use the imported image from beigeImage
+        backgroundImage: `url('/beige.jpg')`, // Replace with the path or URL of beige.jpg
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
         backgroundSize: 'cover',

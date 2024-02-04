@@ -21,7 +21,7 @@ export default function Home() {
     <div>
       {/* Hero Section with Container */}
       <div className="relative bg-cover bg-center" 
-          style={{ height: 'calc(80vh - 100px)', backgroundImage: `url(${Image1})`,  }}>
+          style={{ height: 'calc(100vh - 100px)', backgroundImage: `url(${Image1})`,  }}>
         {/* ... Hero Content ... */}
 
         {/* Color Blocks at the bottom with hover effect */}
@@ -45,7 +45,7 @@ export default function Home() {
 
       {/* Crowd Section */}
       <div className="relative bg-cover bg-center" 
-           style={{ height: 'calc(80vh - 100px)', backgroundImage: `url(${crowdImage})`}}>
+           style={{ height: 'calc(100vh - 100px)', backgroundImage: `url(${crowdImage})`}}>
         {/* ... Craftsmen Content ... */}
 
         {/* Color Block at the bottom with hover effect */}
@@ -58,7 +58,7 @@ export default function Home() {
 
       {/* Legacy Section */}
       <div className="relative bg-cover bg-center" 
-           style={{ height: 'calc(80vh - 100px)', backgroundImage: `url(${Image2})`, backgroundSize: '70%' }}>
+           style={{ height: 'calc(100vh - 100px)', backgroundImage: `url(${Image2})`, backgroundSize: '70%' }}>
         {/* ... Tour Content ... */}
 
         {/* Color Block at the bottom with hover effect */}
