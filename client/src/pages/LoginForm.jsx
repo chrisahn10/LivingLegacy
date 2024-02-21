@@ -1,6 +1,7 @@
 import AuthService from '../utils/auth';
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
 import SignupForm from './SignupForm';
@@ -32,6 +33,8 @@ const LoginForm = () => {
   // submit form
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+    const navigate = useNavigate();
+
     console.log("hello")
     try {
       const { data } = await login({
@@ -39,6 +42,7 @@ const LoginForm = () => {
       });
 
       AuthService.login(data.login.token);
+      navigate('/SignupForm')
     } catch (e) {
       console.error(e);
     }

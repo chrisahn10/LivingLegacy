@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../utils/mutations";
+import { useNavigate } from 'react-router-dom';
 import {
   Card,
   Input,
@@ -28,6 +29,7 @@ const SignupForm = () => {
     });
   };
 
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     console.log(formState);
@@ -38,6 +40,7 @@ const SignupForm = () => {
       });
 
       Auth.login(data.addUser.token);
+      useNavigate('/LoginForm');
     } catch (e) {
       console.error(e);
     }
