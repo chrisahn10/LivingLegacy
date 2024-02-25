@@ -1,17 +1,19 @@
-# Book-Search-using-MERN
+# Living Legacy
 
-The Book Search application is a React-based web platform that allows users to search for books and save their favorites. It leverages GraphQL with Apollo Client for efficient data handling and Bootstrap for a responsive, user-friendly interface.
+Living Legacy is a React-based web platform that allows users to connect with eachother and learn more about historical figures of black history. It leverages GraphQL with Apollo Client for efficient data handling and tailwind for a responsive, user-friendly interface.
 
 ## Features
 
-- **Search Books**: Users can search for books using the Google Books API.
-- **Save Books**: Users have the option to save books to their personal list.
-- **User Authentication**: The application includes user authentication for secure access to personal saved books.
-- **Responsive Design**: Implemented using Bootstrap, ensuring a seamless experience across different devices.
+- **Chatbot**: Users can talk to AI pretending to be historical figures so that they can learn more about black history.
+- **Comments**: Users have the option comment on other users posts
+- **User Authentication**: The application includes user authentication for secure access to personal posts and comments.
+- **Responsive Design**: Implemented using tailwind, ensuring a seamless experience across different devices.
 
 ## Technologies Used
 
 - React.js
+- MongoDB
+- Express.js
 - Apollo Client
 - Bootstrap
 - GraphQL
@@ -47,8 +49,8 @@ npm install
 
 - `App.jsx`: Root component that sets up the Apollo Client and routing.
 - `main.jsx`: Entry point for the React application.
-- `SavedBooks.jsx`: Component for displaying and managing saved books.
-- `SearchBooks.jsx`: Component for searching books.
+- `SinglePost.jsx`: Component to isolate single posts to view comments
+- `PostDisplay.jsx`: Component to display the posts from all users sorted from most recent
 - `LoginForm.jsx` & `SignupForm.jsx`: Components for user authentication.
 - `Navbar.jsx`: Navigation component.
 - `App.css`: Stylesheet for the application.
