@@ -30,8 +30,8 @@ export default defineConfig({
         manualChunks: {
           react: ['react', 'react-dom'],
           // Manual chunks for each image
-          image1: ['./src/assets/home/main-ferriswheel.jpg'],
-          image2: ['./src/assets/home/event-center.jpg'],
+          
+         
         },
       },
     },
